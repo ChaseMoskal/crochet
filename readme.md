@@ -1,6 +1,14 @@
 
 # what if you could just start writing javascript in any text file?
 
+*"crocodile" is the codename for this secret project to create a super simple and elegant static site generator.*
+
+Mostly, I just thought it must be really powerful if one could actually write javascript inline any text file, like PHP.
+
+At the moment, javascript blocks are evaluated concurrently, however, we should be using a reducer to chug through these sequentially.
+
+Also, a basic CLI should be made.
+
 **template.html**
 
     <!doctype html>

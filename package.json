@@ -1,5 +1,5 @@
 {
-  "name": "crocodile",
+  "name": "crocodile-compiler",
   "version": "0.0.0",
   "description": "what if you could just write javascript in any text file?",
   "main": "./build/crocodile.js",

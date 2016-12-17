@@ -1,3 +1,4 @@
 
-source/**/*.test*
-build/**/*.test*
+source/tests
+build/tests
+npm-debug*
