@@ -1,0 +1,30 @@
+{
+  "name": "crocodile",
+  "version": "0.0.0",
+  "description": "what if you could just write javascript in any text file?",
+  "main": "./build/crocodile.js",
+  "scripts": {
+    "build": "rimraf build && tsc -v && tsc && npm test --silent",
+    "test": "node build/tests/crocodile.test.js | faucet"
+  },
+  "bin": {
+    "crocodile": "./build/crocodile.js"
+  },
+  "author": "Chase Moskal",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/glob": "~5.0.30",
+    "@types/node": "~6.0.51",
+    "@types/tape": "~4.2.28",
+    "chai": "~3.5.0",
+    "faucet": "0.0.1",
+    "glob": "~7.1.1",
+    "rimraf": "~2.5.4",
+    "tape": "~4.6.3",
+    "typescript": "~2.1.4"
+  },
+  "dependencies": {
+    "glob": "^7.1.1",
+    "gray-matter": "~2.1.0"
+  }
+}
