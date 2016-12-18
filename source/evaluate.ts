@@ -1,14 +1,14 @@
 
-/** Regular expression for parsing crocodile blocks ("<?js ?>" tags). */
+/** Regular expression for parsing js blocks ("<?js ?>" tags). */
 const regex = /<\?(?:js|)(.*?)\?>/ig
 
 /** Magic token used internally temporarily. */
-const token = "<@@-CROCODILE-TOKEN-@@>"
+const token = "<@@-CROCHET-TOKEN-@@>"
 
 /**
- * Evaluate crocodile blocks of javascript with a given context.
+ * Evaluate blocks of javascript, with the provided context.
  */
-export default async function evaluate(input: string, context?: Object): Promise<string> {
+export default async function evaluate(input: string, context: Object = {}): Promise<string> {
 
   // Evaluate and invoke each javascript snippet with context.
   const evaluations = await Promise.all(

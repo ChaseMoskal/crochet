@@ -4,7 +4,9 @@ import * as cglob from "glob"
 import * as matter from "gray-matter"
 
 /**
+ * Glob for files.
  * Return array of file paths matching the provided glob pattern.
+ * Just the 'glob' tool from npm, wrapped up with a handy promise interace.
  */
 export async function glob(pattern: string, options: cglob.IOptions = {}): Promise<string[]> {
   return new Promise<string[]>((resolve, reject) => {
@@ -16,18 +18,20 @@ export async function glob(pattern: string, options: cglob.IOptions = {}): Promi
 }
 
 /**
- * Read a file, and its frontmatter.
+ * Read a file.
+ * Return a report including the path, preamble, and content.
+ * Preamble is optional YAML or JSON frontmatter.
  */
 export async function read(path: string): Promise<FileReadReport> {
   return new Promise<FileReadReport>((resolve, reject) => {
     fs.readFile(path, "utf8", (error, rawtext) => {
-      if (error) 
+      if (error)
         reject(error)
       else {
         const { data, content } = matter(rawtext)
         return resolve({
           path,
-          frontmatter: data,
+          preamble: data,
           content
         })
       }
@@ -36,7 +40,8 @@ export async function read(path: string): Promise<FileReadReport> {
 }
 
 /**
- * Write a file, based on the provided mandate.
+ * Write a file.
+ * Provide a 'mandate' object, which includes the 'path' and 'content' to write.
  */
 export async function write(mandate: FileWriteMandate): Promise<void> {
   const {path, content} = mandate
@@ -49,7 +54,8 @@ export async function write(mandate: FileWriteMandate): Promise<void> {
 }
 
 /**
- * Read multiple files, provide a glob.
+ * Read all files which match your glob pattern.
+ * Return a report for each file.
  */
 export async function readAll(pattern: string): Promise<FileReadReport[]> {
   const paths = await glob(pattern)
@@ -58,7 +64,7 @@ export async function readAll(pattern: string): Promise<FileReadReport[]> {
 }
 
 /**
- * Write multiple files, given an array of mandates.
+ * Write all files described by your array of mandates.
  */
 export async function writeAll(mandates: FileWriteMandate[]): Promise<void> {
   await Promise.all(mandates.map(write))
@@ -78,5 +84,5 @@ export interface FileWriteMandate {
 export interface FileReadReport extends FileWriteMandate {
   path: string
   content: string
-  frontmatter: any
+  preamble: any
 }
