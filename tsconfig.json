@@ -1,12 +1,15 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
-        "moduleResolution": "node",
-        "rootDir": "source",
-        "outDir": "build",
-        "noImplicitAny": true,
-        "sourceMap": true,
-        "declaration": true
-    }
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "moduleResolution": "node",
+    "rootDirs": [
+      "declarations",
+      "source"
+    ],
+    "outDir": "build",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "declaration": true
+  }
 }

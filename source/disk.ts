@@ -1,5 +1,7 @@
 
+import * as fs from "fs"
 import * as cglob from "glob"
+import * as matter from "gray-matter"
 
 /**
  * Return array of file paths matching the provided glob pattern.
@@ -17,14 +19,33 @@ export async function glob(pattern: string, options: cglob.IOptions = {}): Promi
  * Read a file, and its frontmatter.
  */
 export async function read(path: string): Promise<FileReadReport> {
-  return Promise.resolve(null)
+  return new Promise<FileReadReport>((resolve, reject) => {
+    fs.readFile(path, "utf8", (error, rawtext) => {
+      if (error) 
+        reject(error)
+      else {
+        const { data, content } = matter(rawtext)
+        return resolve({
+          path,
+          frontmatter: data,
+          content
+        })
+      }
+    })
+  })
 }
 
 /**
  * Write a file, based on the provided mandate.
  */
 export async function write(mandate: FileWriteMandate): Promise<void> {
-  return Promise.resolve(null)
+  const {path, content} = mandate
+  return new Promise<void>((resolve, reject) => {
+    fs.writeFile(path, (error: NodeJS.ErrnoException) => {
+      if (error) reject (error)
+      else resolve()
+    })
+  })
 }
 
 /**

@@ -16,6 +16,9 @@ export default async function evaluate(input: string, context?: Object): Promise
     // Obtain array of blocks.
     input.match(regex)
 
+      // Flip null and undefined to empty string.
+      .map(block => block ? block : "")
+
       // Narrow each block down to its pure javascript snippet.
       .map(block => block.match(new RegExp(regex.source, "i"))[1])
 
