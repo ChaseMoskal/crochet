@@ -3,9 +3,10 @@ import * as test from "tape"
 import evaluate from "../evaluate"
 
 test("evaluate blocks with <?js and <?", async function(t) {
-  t.plan(2)
+  t.plan(3)
   t.equal(await evaluate("<?js()=>1?>"), "1")
   t.equal(await evaluate("<?()=>1?>"), "1")
+  t.equal(await evaluate("<?()=>\n1\n?>"), "1", "multiline blocks")
 })
 
 test("evaluate a value", async function(t) {

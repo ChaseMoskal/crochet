@@ -1,6 +1,6 @@
 
 /** Regular expression for parsing js blocks ("<?js ?>" tags). */
-const regex = /<\?(?:js|)(.*?)\?>/ig
+const regex = /<\?(?:js|)([\s\S]*?)\?>/igm
 
 /** Magic token used internally temporarily. */
 const token = "<@@-CROCHET-TOKEN-@@>"
@@ -20,7 +20,7 @@ export default async function evaluate(input: string, context: Object = {}): Pro
       .map(block => block ? block : "")
 
       // Narrow each block down to its pure javascript snippet.
-      .map(block => block.match(new RegExp(regex.source, "i"))[1])
+      .map(block => block.match(new RegExp(regex.source, "im"))[1])
 
       // Evaluate each javascript snippet.
       .map(script => eval(`(${script})`))
