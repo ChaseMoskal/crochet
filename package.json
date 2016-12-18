@@ -1,6 +1,6 @@
 {
   "name": "crochet",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "What if you could write javascript in any text file?",
   "main": "./build/crochet.js",
   "scripts": {

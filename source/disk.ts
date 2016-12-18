@@ -107,13 +107,17 @@ export async function write(mandate: FileWriteMandate): Promise<void> {
 }
 
 /**
- * Read all files which match your glob pattern.
- * Return a report for each file.
+ * Read the files of the provided paths.
  */
-export async function readAll(pattern: string): Promise<FileReadReport[]> {
-  const paths = await glob(pattern)
-  const reports = paths.map(read)
-  return Promise.all(reports)
+export async function readAll(paths: string[]): Promise<FileReadReport[]> {
+  return Promise.all(paths.map(read))
+}
+
+/**
+ * Read files matching the provided glob pattern.
+ */
+export async function readGlob(pattern: string): Promise<FileReadReport[]> {
+  return readAll(await glob(pattern))
 }
 
 /**
