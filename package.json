@@ -1,6 +1,6 @@
 {
   "name": "crochet",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "What if you could write javascript in any text file?",
   "main": "./build/crochet.js",
   "scripts": {
@@ -13,18 +13,20 @@
   "author": "Chase Moskal",
   "license": "ISC",
   "devDependencies": {
-    "@types/glob": "~5.0.30",
-    "@types/node": "~6.0.51",
-    "@types/tape": "~4.2.28",
-    "chai": "~3.5.0",
+    "@types/glob": "^5.0.30",
+    "@types/mkdirp": "^0.3.29",
+    "@types/node": "^6.0.51",
+    "@types/tape": "^4.2.28",
+    "chai": "^3.5.0",
     "faucet": "0.0.1",
-    "glob": "~7.1.1",
-    "rimraf": "~2.5.4",
-    "tape": "~4.6.3",
-    "typescript": "~2.1.4"
+    "glob": "^7.1.1",
+    "rimraf": "^2.5.4",
+    "tape": "^4.6.3",
+    "typescript": "^2.1.4"
   },
   "dependencies": {
-    "glob": "~7.1.1",
-    "gray-matter": "~2.1.0"
+    "glob": "^7.1.1",
+    "gray-matter": "^2.1.0",
+    "mkdirp": "^0.5.1"
   }
 }

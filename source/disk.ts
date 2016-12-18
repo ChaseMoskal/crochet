@@ -1,21 +1,69 @@
 
 import * as fs from "fs"
+import * as path from "path"
 import * as cglob from "glob"
+import * as mkdirp from "mkdirp"
 import * as matter from "gray-matter"
+
+const slashRegex = /\/|\\/
 
 /**
  * Glob for files.
  * Return array of file paths matching the provided glob pattern.
- * Just the 'glob' tool from npm, wrapped up with a handy promise interace.
+ * Promise wrapper for the npm 'glob' module.
  */
 export async function glob(pattern: string, options: cglob.IOptions = {}): Promise<string[]> {
   return new Promise<string[]>((resolve, reject) => {
     cglob(pattern, options, (error: Error, matches: string[]) => {
       if (error) reject(error)
-      else resolve(matches)
+      else {
+        resolve(matches)
+      }
     })
   })
 }
+
+/**
+ * Make directories.
+ * Promise wrapper for the 'mkdirp' npm module.
+ */
+export async function mkdir(dirpath: string) {
+  return new Promise<void>((resolve, reject) => {
+    mkdirp(dirpath, (error: Error) => {
+      if (error) reject(error)
+      else resolve()
+    })
+  })
+}
+
+/**
+ * Make directories for a given file path.
+ * Assumes the last segment is the file name, every segment before that is a directory.
+ */
+export async function mkdirForFile(filepath: string) {
+
+  // No slash, no directories to make.
+  if (!slashRegex.test(filepath))
+    return
+
+  // Separate the filename from the dirpath.
+  const segments = filepath.split(slashRegex)
+  const filename = segments.pop()
+  const dirpath = segments.join("/")
+
+  // Make directories.
+  await mkdir(dirpath)
+}
+
+/**
+ * Remove the extension from a filepath or filename.
+ */
+export function extensionless(filepath: string) {
+  return filepath.replace(/\.[^/.]+$/, "")
+}
+
+/** Get the filename portion of a path. Synonym for `path.basename`. */
+export const filename = path.basename
 
 /**
  * Read a file.
@@ -45,8 +93,13 @@ export async function read(path: string): Promise<FileReadReport> {
  */
 export async function write(mandate: FileWriteMandate): Promise<void> {
   const {path, content} = mandate
+
+  // Make directories for the file.
+  await mkdirForFile(path)
+
+  // Promise-wrap the 'fs' node module.
   return new Promise<void>((resolve, reject) => {
-    fs.writeFile(path, (error: NodeJS.ErrnoException) => {
+    fs.writeFile(path, content, (error: NodeJS.ErrnoException) => {
       if (error) reject (error)
       else resolve()
     })

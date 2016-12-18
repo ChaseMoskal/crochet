@@ -2,8 +2,6 @@
 Crochet
 =======
 
-### *What if you could write javascript in any text file?*
-
 Templating languages and static side generators feel overcomplicated, and involve too much learning domain-specific languages and minutae. I wanted a minimalistic toolkit which works entirely with my pre-existing skillset as a JavaScript developer, and makes it easy to use straigtforward javascript as my templating language, like PHP.
 
 Crochet is a small toolkit which helps you click together your own static site generator (or whatever). Crochet isn't a monolithic tool. It's a minimalistic number of purpose-driven tools which help with writing little scripts to statically generate websites.
