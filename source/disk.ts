@@ -107,6 +107,16 @@ export async function write(mandate: FileWriteMandate): Promise<void> {
 }
 
 /**
+ * Copy a text file, but without the preamble.
+ */
+export async function copy(sourcePath: string, destinationPath: string): Promise<void> {
+  write({
+    path: destinationPath,
+    content: (await read(sourcePath)).content
+  });
+}
+
+/**
  * Read the files of the provided paths.
  */
 export async function readAll(paths: string[]): Promise<FileReadReport[]> {
