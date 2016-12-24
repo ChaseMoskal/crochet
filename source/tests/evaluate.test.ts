@@ -29,14 +29,17 @@ test("evaluate a normal function", async function(t) {
   t.equal(await evaluate("abc <?function(){return 2+2}?> xyz"), "abc 4 xyz")
 })
 
-test("evaluate is asynchronous", async function(t) {
+test("evaluate a promise", async function(t) {
   t.plan(1)
   t.equal(await evaluate("<?()=>new Promise(r=>setTimeout(()=>r(9),10))?>"), "9")
 })
 
 test.skip("evaluate an async function", async function(t) {
   t.plan(1)
-  t.equal(await evaluate("abc <?async function(){return 2+2}?> xyz"), "abc 4 xyz")
+  t.equal(await evaluate(
+    "abc <?async function(){return new Promise(r=>setTimeout(()=>r(9),10))}?> xyz"),
+    "abc 9 xyz"
+  )
 })
 
 test("evaluate provides context to function", async function(t) {

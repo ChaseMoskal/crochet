@@ -24,6 +24,19 @@ export async function glob(pattern: string, options: cglob.IOptions = {}): Promi
 }
 
 /**
+ * Remove the extension from a filepath or filename.
+ */
+export function extensionless(filepath: string) {
+  return filepath.replace(/\.[^/.]+$/, "")
+}
+
+/**
+ * Function to get the filename portion of a path.
+ * Synonym for `path.basename`.
+ */
+export const filename = path.basename
+
+/**
  * Make directories.
  * Promise wrapper for the 'mkdirp' npm module.
  */
@@ -54,16 +67,6 @@ export async function mkdirForFile(filepath: string) {
   // Make directories.
   await mkdir(dirpath)
 }
-
-/**
- * Remove the extension from a filepath or filename.
- */
-export function extensionless(filepath: string) {
-  return filepath.replace(/\.[^/.]+$/, "")
-}
-
-/** Get the filename portion of a path. Synonym for `path.basename`. */
-export const filename = path.basename
 
 /**
  * Read a file.
@@ -107,13 +110,27 @@ export async function write(mandate: FileWriteMandate): Promise<void> {
 }
 
 /**
- * Read all files which match your glob pattern.
- * Return a report for each file.
+ * Copy a text file, but without the preamble.
  */
-export async function readAll(pattern: string): Promise<FileReadReport[]> {
-  const paths = await glob(pattern)
-  const reports = paths.map(read)
-  return Promise.all(reports)
+export async function copy(sourcePath: string, destinationPath: string): Promise<void> {
+  write({
+    path: destinationPath,
+    content: (await read(sourcePath)).content
+  });
+}
+
+/**
+ * Read the files of the provided paths.
+ */
+export async function readAll(paths: string[]): Promise<FileReadReport[]> {
+  return Promise.all(paths.map(read))
+}
+
+/**
+ * Read files matching the provided glob pattern.
+ */
+export async function readGlob(pattern: string): Promise<FileReadReport[]> {
+  return readAll(await glob(pattern))
 }
 
 /**
