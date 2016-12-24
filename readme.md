@@ -1,32 +1,49 @@
 
-Crochet
-=======
+Crochet — *write javascript anywhere*
+=====================================
 
-Templating languages and static side generators feel overcomplicated, and involve too much learning domain-specific languages and minutae. I wanted a minimalistic toolkit which works entirely with my pre-existing skillset as a JavaScript developer, and makes it easy to use straigtforward javascript as my templating language, like PHP.
+### `npm install --save-dev crochet`
 
-Crochet is a small toolkit which helps you click together your own static site generator (or whatever). Crochet isn't a monolithic tool. It's a minimalistic number of purpose-driven tools which help with writing little scripts to statically generate websites.
+  - **JavaScript as a templating language.**  
+    Inject JavaScript into any file with `<?js ?>` or `<? ?>` tags, syntactically like PHP.  
+    When you render a template, you provide a context object.  
+    *A contrived example:*
 
-Crochet is written in TypeScript, so that it remains rigidly awesome, type definitions are awesome, and accurate API docs can be generated in the future. For now, if you want to understand Crochet's API, consider reading the `.d.ts` files or the source code itself.
+        <div>
+          <strong> <?context.fullName?> <strong>
+          <a href="mailto:<?context.email?>"> <?context.email?> </a>
+          <ul>
+            <?js
+              context.fetchItemsByTag(context.tag)
+                .then(items => items.map(item => `<li>${ item.label }</li>`))
+                .then(items => items.join(""))
+            ?>
+          </ul>
+        </div>
 
-### Crochet's `evaluate` function:
+  - **A minimalistic toolbox.**  
+    Purpose-driven utilities which help you statically generate websites.
 
-  - **evaluate** — take your input text, and render any inline javascript blocks `<?'which look like this'?>` in-place. You can provide a `context` object, which can contain any valid javascript construct, including values and functions.
+  - **Written in TypeScript.** Code hint details available if you're using VSCode.
 
-### Crochet's handy disk IO utilities:
+### `import evaluate from "crochet/build/evaluate"`
 
-  - **glob** — get a bunch of filenames that match your glob
-  - **read** — read a file
-  - **write** — write a file
-  - **readAll** — read files matching your glob
-  - **writeAll** — write a bunch of files
+  - **evaluate(input: string, context?: Object): Promise\<string\>**  
+    Render inline javascript blocks `<?'which look like this'?>`.  
+    You can provide a `context` object, which can contain any valid javascript, including values and functions.  
+    [evaluate.ts source code.](./source/evaluate.ts)
 
+### `import { glob, mkdir, read, readGlob, readAll, write, copy } from "crochet/build/disk"`
 
-Example
--------
+  - **Disk IO utilities** including *glob, mkdir, read, write, copy, readGlob, writeAll*  
+    [disk.ts source code.](./source/disk.ts)
 
-  1. `npm install --save-dev crochet`
+--------
 
-### template.html
+Contrived usage example:
+------------------------
+
+#### template.html
 
     <!doctype html>
     <html>
@@ -41,37 +58,35 @@ Example
         <main>
 
           <? (context) => {
-            return context.main || "no main content found"
+            return context.content || "no content found"
               // Any javascript is valid.
-              // The context object can be provided with functions.
+              // The context object can have values and functions.
           } ?>
 
         </main>
       </body>
     </html>
 
-### generate-awesome-website.ts
+#### generate-awesome-website.ts
 
     import { evaluate, read, readAll, writeAll } from "crochet"
 
+    // Immediately invoked function generates the site.
     (async function() {
 
       // Read the template.
-      const template = await read("template.html").content
+      const template = await read("template.html")
 
-      // Read the markdown sources.
-      const sources = await readAll("articles/**/*.md")
+      // Read the article sources.
+      const sources = await readAll("articles/**/*.html")
 
-      // Render articles.
-      const articles = sources.map(source => ({
+      // Write the articles.
+      await writeAll(sources.map(source => ({
 
         // Destined for the build directory.
         path: `build/${source.path}`,
 
         // Evaluation of <?js ?> javascript blocks, with `source` provided as context.
-        main: evaluate(template, source)
-      }))
-
-      // Write the articles.
-      await writeAll(articles)
+        content: evaluate(template.content, source)
+      })))
     })()
