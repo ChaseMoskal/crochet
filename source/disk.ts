@@ -24,6 +24,19 @@ export async function glob(pattern: string, options: cglob.IOptions = {}): Promi
 }
 
 /**
+ * Remove the extension from a filepath or filename.
+ */
+export function extensionless(filepath: string) {
+  return filepath.replace(/\.[^/.]+$/, "")
+}
+
+/**
+ * Function to get the filename portion of a path.
+ * Synonym for `path.basename`.
+ */
+export const filename = path.basename
+
+/**
  * Make directories.
  * Promise wrapper for the 'mkdirp' npm module.
  */
@@ -54,16 +67,6 @@ export async function mkdirForFile(filepath: string) {
   // Make directories.
   await mkdir(dirpath)
 }
-
-/**
- * Remove the extension from a filepath or filename.
- */
-export function extensionless(filepath: string) {
-  return filepath.replace(/\.[^/.]+$/, "")
-}
-
-/** Get the filename portion of a path. Synonym for `path.basename`. */
-export const filename = path.basename
 
 /**
  * Read a file.
