@@ -3,7 +3,7 @@ import * as fs from "fs"
 import * as path from "path"
 import * as cglob from "glob"
 import * as mkdirp from "mkdirp"
-import * as matter from "gray-matter"
+import matter from "gray-matter"
 
 const slashRegex = /\/|\\/
 

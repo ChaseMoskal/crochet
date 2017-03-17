@@ -6,7 +6,8 @@ const regex = /<\?(?:js|)([\s\S]*?)\?>/igm
 const token = "<@@-CROCHET-TOKEN-@@>"
 
 /**
- * Evaluate blocks of javascript, with the provided context.
+ * Evaluate blocks of javascript in-place within the provided 'input' string.
+ * Each block is provided the given 'context' object, which can have javascript values and functions.
  */
 export default async function evaluate(input: string, context: Object = {}): Promise<string> {
 
