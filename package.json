@@ -4,6 +4,7 @@
   "description": "write javascript anywhere",
   "main": "./build/crochet.js",
   "scripts": {
+    "prepublish": "npm run build --silent",
     "build": "rimraf build && tsc -v && tsc && npm test --silent",
     "test": "node build/tests/crochet.test.js | faucet"
   },
@@ -30,3 +31,4 @@
     "mkdirp": "^0.5.1"
   }
 }
+
