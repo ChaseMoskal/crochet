@@ -5,8 +5,8 @@
   "main": "./build/crochet.js",
   "scripts": {
     "prepublish": "npm run build --silent",
-    "build": "rimraf build && tsc -v && tsc && npm test --silent",
-    "test": "node build/tests/crochet.test.js | faucet"
+    "build": "rimraf build && tsc -v && tsc && node build/tests/crochet.test.js | faucet",
+    "test": "exit 0"
   },
   "bin": {
     "crochet": "./build/crochet.js"
