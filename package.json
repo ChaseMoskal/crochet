@@ -1,9 +1,10 @@
 {
   "name": "crochet",
-  "version": "0.1.0",
+  "version": "0.1.1-dev",
   "description": "write javascript anywhere",
   "main": "./build/crochet.js",
   "scripts": {
+    "prepublish": "npm run build --silent",
     "build": "rimraf build && tsc -v && tsc && npm test --silent",
     "test": "node build/tests/crochet.test.js | faucet"
   },
@@ -22,7 +23,7 @@
     "glob": "^7.1.1",
     "rimraf": "^2.5.4",
     "tape": "^4.6.3",
-    "typescript": "^2.1.4"
+    "typescript": "^2.2.1"
   },
   "dependencies": {
     "glob": "^7.1.1",
@@ -30,3 +31,4 @@
     "mkdirp": "^0.5.1"
   }
 }
+
