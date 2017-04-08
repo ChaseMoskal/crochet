@@ -1,6 +1,6 @@
 {
   "name": "crochet",
-  "version": "0.2.0",
+  "version": "0.3.0-dev",
   "description": "write javascript anywhere",
   "main": "./build/crochet.js",
   "scripts": {
