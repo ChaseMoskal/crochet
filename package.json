@@ -2,14 +2,14 @@
   "name": "crochet",
   "version": "0.3.0-dev",
   "description": "write javascript anywhere",
-  "main": "./build/crochet.js",
+  "main": "./o/crochet.js",
   "scripts": {
     "prepublish": "npm run build --silent",
-    "build": "rimraf build && tsc -v && tsc && node build/tests/crochet.test.js | faucet",
+    "build": "rimraf build && tsc -v && tsc && node o/tests/crochet.test.js | faucet",
     "test": "exit 0"
   },
   "bin": {
-    "crochet": "./build/crochet.js"
+    "crochet": "./o/crochet.js"
   },
   "author": "Chase Moskal",
   "license": "ISC",

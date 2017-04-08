@@ -1,4 +1,4 @@
 
-source/tests
-build/tests
+s/tests
+o/tests
 npm-debug*

@@ -5,7 +5,7 @@
       "name": "crochet.tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/build/crochet.test.js",
+      "program": "${workspaceRoot}/o/crochet.test.js",
       "cwd": "${workspaceRoot}",
       "outFiles": [],
       "sourceMaps": true
