@@ -1,4 +1,12 @@
 
+/*
+
+====================
+~ WIP CONCEPT WORK ~
+====================
+
+*/
+
 export interface CrochetOptions {
   root: string
 }
@@ -8,11 +16,16 @@ export default class Crochet {
 
   constructor({root = "."}: CrochetOptions) {
     this.root = root
+    throw Error(`UNIMPLEMENTED`)
   }
 
-  async pages({template, source, out, home, context}: CrochetPagesOptions) {}
+  async pages({template, source, out, home, context}: CrochetPagesOptions) {
+    throw Error(`UNIMPLEMENTED`)
+  }
 
-  async blog({template, source, out, context}: CrochetBlogOptions) {}
+  async blog({template, source, out, context}: CrochetBlogOptions) {
+    throw Error(`UNIMPLEMENTED`)
+  }
 }
 
 export interface CrochetPagesOptions {
