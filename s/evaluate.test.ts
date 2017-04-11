@@ -1,6 +1,6 @@
 
 import * as test from "tape"
-import evaluate from "../evaluate"
+import evaluate from "./evaluate"
 
 test("evaluate blocks with <?js and <?", async function(t) {
   t.plan(3)

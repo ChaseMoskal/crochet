@@ -11,7 +11,7 @@
   "files.insertFinalNewline": true,
 
   "files.exclude": {
-    "build": true,
+    "o": true,
     "node_modules": true,
     "*.log*": true
   },

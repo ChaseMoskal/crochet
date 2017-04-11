@@ -1,29 +1,29 @@
 {
   "name": "crochet",
-  "version": "0.2.0",
+  "version": "0.3.0-dev",
   "description": "write javascript anywhere",
-  "main": "./build/crochet.js",
+  "main": "./o/crochet.js",
   "scripts": {
     "prepublish": "npm run build --silent",
-    "build": "rimraf build && tsc -v && tsc && node build/tests/crochet.test.js | faucet",
+    "build": "rimraf build && tsc -v && tsc && tape 'o/**/*.test.js' | faucet",
     "test": "exit 0"
   },
   "bin": {
-    "crochet": "./build/crochet.js"
+    "crochet": "./o/crochet.js"
   },
   "author": "Chase Moskal",
   "license": "ISC",
   "devDependencies": {
     "@types/glob": "^5.0.30",
     "@types/mkdirp": "^0.3.29",
-    "@types/node": "^6.0.51",
+    "@types/node": "^7.0.12",
     "@types/tape": "^4.2.28",
     "chai": "^3.5.0",
     "faucet": "0.0.1",
     "glob": "^7.1.1",
     "rimraf": "^2.5.4",
     "tape": "^4.6.3",
-    "typescript": "^2.2.1"
+    "typescript": "^2.2.2"
   },
   "dependencies": {
     "glob": "^7.1.1",
@@ -31,4 +31,3 @@
     "mkdirp": "^0.5.1"
   }
 }
-

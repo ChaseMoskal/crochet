@@ -4,11 +4,8 @@
     "target": "es6",
     "moduleResolution": "node",
     "lib": ["es6"],
-    "rootDirs": [
-      "declarations",
-      "source"
-    ],
-    "outDir": "build",
+    "rootDir": "s",
+    "outDir": "o",
     "noImplicitAny": true,
     "sourceMap": true,
     "declaration": true

@@ -1,4 +1,3 @@
 
-source/tests
-build/tests
-npm-debug*
+o/**/*.test.js
+s/**/*.test.ts
