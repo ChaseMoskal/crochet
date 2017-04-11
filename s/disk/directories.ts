@@ -1,14 +1,14 @@
 
 //
-// Utilities for creating directories.
+// Utilities for creating directories
 //
 
 import * as mkdirp from "mkdirp"
 const slashRegex = /\/|\\/
 
 /**
- * Make directories.
- * Promise wrapper for the 'mkdirp' npm module.
+ * Make directories
+ * Promise wrapper for the 'mkdirp' npm module
  */
 export async function mkdir(dirpath: string) {
   return new Promise<void>((resolve, reject) => {
@@ -20,20 +20,19 @@ export async function mkdir(dirpath: string) {
 }
 
 /**
- * Make directories for a given file path.
- * Assumes the last segment is the file name, every segment before that is a directory.
+ * Make directories for a given file path
  */
 export async function mkdirForFile(filepath: string) {
 
-  // No slash, no directories to make.
+  // No slash, no directories to make
   if (!slashRegex.test(filepath))
     return
 
-  // Separate the filename from the dirpath.
+  // Separate the filename from the dirpath
   const segments = filepath.split(slashRegex)
   const filename = segments.pop()
   const dirpath = segments.join("/")
 
-  // Make directories.
+  // Make directories
   await mkdir(dirpath)
 }
