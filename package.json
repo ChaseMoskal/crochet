@@ -1,11 +1,11 @@
 {
   "name": "crochet",
-  "version": "0.3.1",
+  "version": "0.3.2-dev",
   "description": "write javascript anywhere",
   "main": "./o/crochet.js",
   "scripts": {
     "prepublish": "npm run build --silent",
-    "build": "rimraf build && tsc -v && tsc && tape 'o/**/*.test.js' | faucet",
+    "build": "rimraf o && tsc -v && tsc && tape 'o/**/*.test.js' | faucet",
     "test": "exit 0"
   },
   "bin": {
