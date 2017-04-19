@@ -8,6 +8,7 @@ const token = "<@@-CROCHET-TOKEN-@@>"
 /**
  * Evaluate blocks of javascript in-place within the provided 'input' string
  * Each block is provided the given 'context' object, which can have javascript values and functions
+ * WARNING: `eval` is used!
  */
 export default async function evaluate(input: string, context: Object = {}): Promise<string> {
 
