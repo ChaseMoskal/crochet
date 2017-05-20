@@ -12,35 +12,38 @@ const token = "<@@-CROCHET-TOKEN-@@>"
  */
 export default async function evaluate(input: string, context: Object = {}): Promise<string> {
 
-  // Evaluate and invoke each javascript snippet with context
+  // if there's nothing to evaluate, just return the input
+  if (!regex.test(input)) return input
+
+  // evaluate and invoke each javascript snippet with context
   const evaluations = await Promise.all(
 
-    // Obtain array of blocks
+    // obtain array of blocks
     input.match(regex)
 
-      // Flip null and undefined to empty string
+      // flip null and undefined to empty string
       .map(block => block ? block : "")
 
-      // Narrow each block down to its pure javascript snippet
+      // narrow each block down to its pure javascript snippet
       .map(block => block.match(new RegExp(regex.source, "im"))[1])
 
-      // Evaluate each javascript snippet
+      // evaluate each javascript snippet
       .map(script => eval(`(${script})`))
 
-      // Invoke the value if it's a function
+      // invoke the value if it's a function
       .map(value => (typeof value === "function")
         ? value(context)
         : (value) ? value : ""
       )
   )
 
-  // Start with a tokenized version of the input
+  // start with a tokenized version of the input
   let final = input.replace(regex, token)
 
-  // With each evaluation, replace the next token
+  // with each evaluation, replace the next token
   for (const evaluation of evaluations)
     final = final.replace(token, evaluation.toString())
 
-  // Return the finalized copy with evaluations in place
+  // return the finalized copy with evaluations in place
   return final
 }
