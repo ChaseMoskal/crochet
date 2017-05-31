@@ -15,18 +15,18 @@
   "license": "ISC",
   "devDependencies": {
     "@types/blue-tape": "^0.1.30",
+    "@types/marked": "0.0.28",
     "@types/mkdirp": "^0.3.29",
-    "@types/node": "^7.0.12",
     "blue-tape": "^1.0.0",
-    "chai": "^3.5.0",
     "faucet": "0.0.1",
     "rimraf": "^2.5.4",
-    "typescript": "^2.2.2"
+    "typescript": "^2.3.4"
   },
   "dependencies": {
     "@types/glob": "^5.0.30",
     "glob": "^7.1.1",
     "gray-matter": "^2.1.0",
+    "marked": "^0.3.6",
     "mkdirp": "^0.5.1"
   }
 }
