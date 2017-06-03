@@ -16,5 +16,9 @@
     "*.log*": true
   },
 
+  "search.exclude": {
+    "o": true
+  },
+
   "typescript.tsdk": "node_modules/typescript/lib/"
 }
