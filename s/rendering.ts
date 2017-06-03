@@ -3,7 +3,7 @@ import {ReadReport, WriteMandate, read, write, readAll, writeAll} from "./files"
 import {extensionless} from "./paths"
 import evaluate from "./evaluate"
 
-import * as path from "path"
+import {join, relative, dirname, basename, extname} from "path"
 import * as marked from "marked"
 
 export interface RenderOptions {
@@ -30,8 +30,6 @@ export async function renderArticles({
   transformer = async (content: string) => marked(content),
 }: RenderArticlesOptions): Promise<WriteMandate[]> {
 
-  const {join, relative, dirname, basename} = path
-
   return Promise.all(articles.map(async article => (<WriteMandate>{
 
     filepath: join(
@@ -40,7 +38,8 @@ export async function renderArticles({
         sourcedir,
         join(
           dirname(article.filepath),
-          basename(extensionless(article.filepath + "." + path.extname(template.filepath)))
+          basename(extensionless(article.filepath)),
+          "index" + extname(template.filepath)
         )
       )
     ),
