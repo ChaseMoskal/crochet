@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "crochet.tests",
+      "name": "rendering.tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/o/crochet.test.js",
+      "program": "${workspaceRoot}/o/rendering.test.js",
       "cwd": "${workspaceRoot}",
       "outFiles": [],
       "sourceMaps": true
