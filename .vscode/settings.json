@@ -11,9 +11,13 @@
   "files.insertFinalNewline": true,
 
   "files.exclude": {
-    "o": true,
+    "o": false,
     "node_modules": true,
     "*.log*": true
+  },
+
+  "search.exclude": {
+    "o": true
   },
 
   "typescript.tsdk": "node_modules/typescript/lib/"
