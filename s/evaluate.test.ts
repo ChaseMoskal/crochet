@@ -1,48 +1,51 @@
 
-import * as test from "blue-tape"
+import {tsuite} from "./testing"
 import evaluate from "./evaluate"
 
-test("evaluate blocks with <?js and <?", async t => {
-  t.equal(await evaluate("<?js()=>1?>"), "1")
-  t.equal(await evaluate("<?()=>1?>"), "1")
-  t.equal(await evaluate("<?()=>\n1\n?>"), "1", "multiline blocks")
-})
+tsuite("evaluate function", t => {
 
-test("evaluate a value", async t => {
-  t.equal(await evaluate("abc <?2+2?> xyz"), "abc 4 xyz")
-})
+  t.test("blocks with <?js and <?", async t => {
+    t.equal(await evaluate("<?js()=>1?>"), "1")
+    t.equal(await evaluate("<?()=>1?>"), "1")
+    t.equal(await evaluate("<?()=>\n1\n?>"), "1", "multiline blocks")
+  })
 
-test("evaluate nothing", async t => {
-  t.equal(await evaluate("abc"), "abc")
-})
+  t.test("a value", async t => {
+    t.equal(await evaluate("abc <?2+2?> xyz"), "abc 4 xyz")
+  })
 
-test("evaluate twice", async t => {
-  t.equal(await evaluate("abc <?2+2?> and <?4*4?> xyz"), "abc 4 and 16 xyz")
-})
+  t.test("nothing", async t => {
+    t.equal(await evaluate("abc"), "abc")
+  })
 
-test("evaluate an arrow function", async t => {
-  t.equal(await evaluate("abc <?()=>2+2?> xyz"), "abc 4 xyz")
-})
+  t.test("twice", async t => {
+    t.equal(await evaluate("abc <?2+2?> and <?4*4?> xyz"), "abc 4 and 16 xyz")
+  })
 
-test("evaluate a normal function", async t => {
-  t.equal(await evaluate("abc <?function(){return 2+2}?> xyz"), "abc 4 xyz")
-})
+  t.test("an arrow function", async t => {
+    t.equal(await evaluate("abc <?()=>2+2?> xyz"), "abc 4 xyz")
+  })
 
-test("evaluate a promise", async t => {
-  t.equal(await evaluate("<?()=>new Promise(r=>setTimeout(()=>r(9),10))?>"), "9")
-})
+  t.test("a normal function", async t => {
+    t.equal(await evaluate("abc <?function(){return 2+2}?> xyz"), "abc 4 xyz")
+  })
 
-test.skip("evaluate an async function", async t => {
-  t.equal(await evaluate(
-    "abc <?async function(){return new Promise(r=>setTimeout(()=>r(9),10))}?> xyz"),
-    "abc 9 xyz"
-  )
-})
+  t.test("a promise", async t => {
+    t.equal(await evaluate("<?()=>new Promise(r=>setTimeout(()=>r(9),10))?>"), "9")
+  })
 
-test("evaluate provides context to function", async t => {
-  t.equal(await evaluate("<?context=>context.lol?>", {lol: "rofl"}), "rofl")
-})
+  t.test("an async function", async t => {
+    t.equal(await evaluate(
+      "abc <?async function(){return new Promise(r=>setTimeout(()=>r(9),10))}?> xyz"),
+      "abc 9 xyz"
+    )
+  })
 
-test("evaluate provides context to value", async t => {
-  t.equal(await evaluate("<?context.lol?>", {lol: "rofl"}), "rofl")
+  t.test("context provided to function", async t => {
+    t.equal(await evaluate("<?context=>context.lol?>", {lol: "rofl"}), "rofl")
+  })
+
+  t.test("context value provided", async t => {
+    t.equal(await evaluate("<?context.lol?>", {lol: "rofl"}), "rofl")
+  })
 })

@@ -6,7 +6,7 @@
     "lib": ["es2017"],
     "rootDir": "s",
     "outDir": "o",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "sourceMap": true,
     "declaration": true
   }
