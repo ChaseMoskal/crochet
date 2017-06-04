@@ -13,15 +13,14 @@ RENDERING TESTS
 
 */
 
-import * as test from "blue-tape"
-
+import {tsuite} from "./testing"
 import {ReadReport, WriteMandate} from "./files"
 import {renderArticles, renderArticleIndex} from "./rendering"
 
 /**
  * Test suite: renderArticles
  */
-test("renderArticles", async t => {
+tsuite("render articles function", async t => {
 
   /**
    * Common constants for tests in this suite to share
@@ -93,40 +92,41 @@ test("renderArticles", async t => {
   })
 })
 
+// TODOSKIP
 
-/**
- * Test to render a blog index page
- */
-test.skip("render blog index", async t => {
+// /**
+//  * Test to render a blog index page
+//  */
+// test.skip("render blog index", async t => {
 
-  // mock markdown article files
-  const articles = <ReadReport[]>[
-    {
-      filepath: "s/blog/1.alpha.md",
-      frontmatter: {title: "alpha title"},
-      content: "# Alpha heading"
-    },
-    {
-      filepath: "s/blog/2.beta.md",
-      frontmatter: {title: "beta title"},
-      content: "# Beta heading"
-    }
-  ]
+//   // mock markdown article files
+//   const articles = <ReadReport[]>[
+//     {
+//       filepath: "s/blog/1.alpha.md",
+//       frontmatter: {title: "alpha title"},
+//       content: "# Alpha heading"
+//     },
+//     {
+//       filepath: "s/blog/2.beta.md",
+//       frontmatter: {title: "beta title"},
+//       content: "# Beta heading"
+//     }
+//   ]
 
-  // mock blog template html
-  const template = <ReadReport>{
-    filepath: "s/template/blog-index.html",
-    content: "<? context.articles.length ?>"
-  }
+//   // mock blog template html
+//   const template = <ReadReport>{
+//     filepath: "s/template/blog-index.html",
+//     content: "<? context.articles.length ?>"
+//   }
 
-  // render the blog index
-  const blogIndexPage = await renderArticleIndex({
-    sourcedir: "s",
-    articles,
-    template,
-    outdir: "o"
-  });
+//   // render the blog index
+//   const blogIndexPage = await renderArticleIndex({
+//     sourcedir: "s",
+//     articles,
+//     template,
+//     outdir: "o"
+//   });
 
-  t.assert(blogIndexPage)
-  t.assert(blogIndexPage.content === "2")
-})
+//   t.assert(blogIndexPage)
+//   t.assert(blogIndexPage.content === "2")
+// })
