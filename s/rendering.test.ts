@@ -20,7 +20,7 @@ import {renderArticles, renderArticleIndex} from "./rendering"
 /**
  * Test suite: renderArticles
  */
-tsuite("render articles function", async t => {
+tsuite("rendering — render articles", async t => {
 
   /**
    * Common constants for tests in this suite to share
@@ -90,6 +90,16 @@ tsuite("render articles function", async t => {
     t.equals(alphaPage.filepath, "o/pages/alpha/index.html", "alpha output filepath is correct")
     t.equals(betaPage.filepath, "o/pages/beta/index.html", "beta output filepath is correct")
   })
+})
+
+declare const render: any
+
+tsuite.skip("rendering — render", async t => {
+  const output = render()
+})
+
+tsuite.skip("rendering — render", async t => {
+  
 })
 
 // TODOSKIP
