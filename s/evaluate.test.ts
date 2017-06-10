@@ -1,8 +1,8 @@
 
-import {tsuite} from "./testing"
+import testSuite from "./testSuite"
 import evaluate from "./evaluate"
 
-tsuite("evaluate function", t => {
+testSuite("evaluate function", t => {
 
   t.test("blocks with <?js and <?", async t => {
     t.equal(await evaluate("<?js()=>1?>"), "1")

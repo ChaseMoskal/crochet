@@ -15,9 +15,3 @@ import * as path from "path"
 export function extensionless(filepath: string) {
   return filepath.replace(/\.[^/.]+$/, "")
 }
-
-/**
- * Function to get the filename portion of a path
- * Synonym for `path.basename`
- */
-export const filename = path.basename
