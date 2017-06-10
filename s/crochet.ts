@@ -2,7 +2,7 @@
 import render from "./render"
 import evaluate from "./evaluate"
 import {extensionless} from "./paths"
-import {FileReadReport, FileWriteMandate} from "./files"
+import {ReadFileReport, WriteFileMandate} from "./files"
 
 import * as marked from "marked"
 import {join, relative, dirname, basename, extname} from "path"
@@ -13,8 +13,8 @@ export interface CrochetOptions {
 }
 
 export interface PagesOptions {
-  pages: FileReadReport[]
-  template: FileReadReport
+  pages: ReadFileReport[]
+  template: ReadFileReport
   context: Object
 }
 
@@ -27,7 +27,7 @@ export default class Crochet {
     this.outdir = options.outdir
   }
 
-  async pages(options: PagesOptions): Promise<FileWriteMandate[]> {
+  async pages(options: PagesOptions): Promise<WriteFileMandate[]> {
     const {pages: articles, template, context} = options
     const {srcdir, outdir} = this
 

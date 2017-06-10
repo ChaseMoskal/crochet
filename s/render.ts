@@ -1,11 +1,11 @@
 
-import {FileReadReport, FileWriteMandate} from "./files"
+import {ReadFileReport, WriteFileMandate} from "./files"
 
 export interface RenderOptions {
-  articles: FileReadReport[]
-  template: FileReadReport
-  pathTransformer: (path: string, page: FileReadReport) => string
-  contentTransformer: (content: string, page: FileReadReport) => Promise<string>
+  articles: ReadFileReport[]
+  template: ReadFileReport
+  pathTransformer: (path: string, page: ReadFileReport) => string
+  contentTransformer: (content: string, page: ReadFileReport) => Promise<string>
 }
 
 export default async function render({
@@ -13,8 +13,8 @@ export default async function render({
   template,
   pathTransformer,
   contentTransformer
-}: RenderOptions): Promise<FileWriteMandate[]> {
-  return Promise.all(articles.map(async page => (<FileWriteMandate>{
+}: RenderOptions): Promise<WriteFileMandate[]> {
+  return Promise.all(articles.map(async page => (<WriteFileMandate>{
     filepath: pathTransformer(page.filepath, page),
     content: await contentTransformer(page.content, page)
   })))

@@ -28,7 +28,7 @@ export async function glob(pattern: string, options: cglob.IOptions = {}): Promi
 /**
  * Report of a file that was read
  */
-export interface FileReadReport {
+export interface ReadFileReport {
   filepath: string
   content: string
   frontmatter: any
@@ -37,7 +37,7 @@ export interface FileReadReport {
 /**
  * Mandate to write a file
  */
-export interface FileWriteMandate {
+export interface WriteFileMandate {
   filepath: string
   content: string
 }
@@ -47,8 +47,8 @@ export interface FileWriteMandate {
  * Return a report including the filepath, preamble, and content
  * Preamble is optional YAML or JSON frontmatter
  */
-export async function readFile(filepath: string): Promise<FileReadReport> {
-  return new Promise<FileReadReport>((resolve, reject) => {
+export async function readFile(filepath: string): Promise<ReadFileReport> {
+  return new Promise<ReadFileReport>((resolve, reject) => {
     fs.readFile(filepath, "utf8", (error, rawtext) => {
       if (error)
         reject(error)
@@ -68,7 +68,7 @@ export async function readFile(filepath: string): Promise<FileReadReport> {
  * Write a text file
  * Provide a 'mandate' object, which includes the 'filepath' and 'content' to write
  */
-export async function writeFile(mandate: FileWriteMandate): Promise<void> {
+export async function writeFile(mandate: WriteFileMandate): Promise<void> {
   const {filepath, content} = mandate
 
   // Make directories for the file.
@@ -96,7 +96,7 @@ export async function copyFile(sourcePath: string, destinationPath: string): Pro
 /**
  * Read files of the provided glob, or array of filepaths
  */
-export async function readFiles(filepaths: string | string[]): Promise<FileReadReport[]> {
+export async function readFiles(filepaths: string | string[]): Promise<ReadFileReport[]> {
   if (typeof filepaths === "string") return readFiles(await glob(filepaths))
   else return Promise.all(filepaths.map(readFile))
 }
@@ -104,6 +104,6 @@ export async function readFiles(filepaths: string | string[]): Promise<FileReadR
 /**
  * Write all files described by your array of mandates
  */
-export async function writeFiles(mandates: FileWriteMandate[]): Promise<void> {
+export async function writeFiles(mandates: WriteFileMandate[]): Promise<void> {
   await Promise.all(mandates.map(writeFile))
 }
