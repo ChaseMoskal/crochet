@@ -1,7 +1,7 @@
 
 import Crochet from "./crochet"
 import testSuite from "./testSuite"
-import {FileReadReport, FileWriteMandate} from "./files"
+import {ReadFileReport, WriteFileMandate} from "./files"
 
 /**
  * Common constants for tests to share
@@ -12,7 +12,7 @@ const common = {
     outdir: "o",
   },
   pagesOptions: {
-    pages: <FileReadReport[]>[
+    pages: <ReadFileReport[]>[
       {
         filepath: "s/pages/alpha.md",
         frontmatter: {title: "alpha title"},
@@ -24,7 +24,7 @@ const common = {
         content: "# Beta heading"
       }
     ],
-    template: <FileReadReport>{
+    template: <ReadFileReport>{
       filepath: "s/templates/page.html",
       content: "<? context.frontmatter.title ?> // <? context.x ?> // <? context.content ?>"
     },
