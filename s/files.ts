@@ -28,7 +28,7 @@ export async function glob(pattern: string, options: cglob.IOptions = {}): Promi
 /**
  * Report of a file that was read
  */
-export interface ReadReport {
+export interface FileReadReport {
   filepath: string
   content: string
   frontmatter: any
@@ -37,7 +37,7 @@ export interface ReadReport {
 /**
  * Mandate to write a file
  */
-export interface WriteMandate {
+export interface FileWriteMandate {
   filepath: string
   content: string
 }
@@ -47,8 +47,8 @@ export interface WriteMandate {
  * Return a report including the filepath, preamble, and content
  * Preamble is optional YAML or JSON frontmatter
  */
-export async function read(filepath: string): Promise<ReadReport> {
-  return new Promise<ReadReport>((resolve, reject) => {
+export async function readFile(filepath: string): Promise<FileReadReport> {
+  return new Promise<FileReadReport>((resolve, reject) => {
     fs.readFile(filepath, "utf8", (error, rawtext) => {
       if (error)
         reject(error)
@@ -65,10 +65,10 @@ export async function read(filepath: string): Promise<ReadReport> {
 }
 
 /**
- * Write a file
+ * Write a text file
  * Provide a 'mandate' object, which includes the 'filepath' and 'content' to write
  */
-export async function write(mandate: WriteMandate): Promise<void> {
+export async function writeFile(mandate: FileWriteMandate): Promise<void> {
   const {filepath, content} = mandate
 
   // Make directories for the file.
@@ -86,30 +86,24 @@ export async function write(mandate: WriteMandate): Promise<void> {
 /**
  * Copy a text file, but without the preamble
  */
-export async function copy(sourcePath: string, destinationPath: string): Promise<void> {
-  await write({
+export async function copyFile(sourcePath: string, destinationPath: string): Promise<void> {
+  await writeFile({
     filepath: destinationPath,
-    content: (await read(sourcePath)).content
+    content: (await readFile(sourcePath)).content
   })
 }
 
 /**
- * Read the files of the provided paths
+ * Read files of the provided glob, or array of filepaths
  */
-export async function readAll(filepaths: string[]): Promise<ReadReport[]> {
-  return Promise.all(filepaths.map(read))
-}
-
-/**
- * Read files matching the provided glob pattern
- */
-export async function readGlob(pattern: string): Promise<ReadReport[]> {
-  return readAll(await glob(pattern))
+export async function readFiles(filepaths: string | string[]): Promise<FileReadReport[]> {
+  if (typeof filepaths === "string") return readFiles(await glob(filepaths))
+  else return Promise.all(filepaths.map(readFile))
 }
 
 /**
  * Write all files described by your array of mandates
  */
-export async function writeAll(mandates: WriteMandate[]): Promise<void> {
-  await Promise.all(mandates.map(write))
+export async function writeFiles(mandates: FileWriteMandate[]): Promise<void> {
+  await Promise.all(mandates.map(writeFile))
 }
