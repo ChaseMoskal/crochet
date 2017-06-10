@@ -2,12 +2,21 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "rendering.tests",
+      "name": "crochet.tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/o/rendering.test.js",
+      "program": "${workspaceRoot}/o/crochet.test.js",
       "cwd": "${workspaceRoot}",
-      "outFiles": [],
+      "outFiles": ["${workspaceRoot}/o/**/*.js"],
+      "sourceMaps": true
+    },
+    {
+      "name": "evaluate.tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/o/evaluate.test.js",
+      "cwd": "${workspaceRoot}",
+      "outFiles": ["${workspaceRoot}/o/**/*.js"],
       "sourceMaps": true
     }
   ]

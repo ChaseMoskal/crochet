@@ -1,3 +1,12 @@
+/*
+
+this file is a hack on top of blue-tape
+
+just for my own personal preferences
+
+to make the tape/faucet output the prettiest
+
+*/
 
 import * as bluetape from "blue-tape"
 
@@ -7,13 +16,13 @@ export interface TSuite {
 }
 
 /**
- * Re-skin of `blue-tape` module, for my own personal preferences
+ * Re-skin of `blue-tape` module
  *  - designed to be used with `faucet`
  *  - prefixes suite label to each case
  *  - uppercase the main suite label
  *  - bullet point indent cases
  */
-export const tsuite = <TSuite>((suitelabel: string, suitefunc: (t: bluetape.Test) => void) => bluetape(
+export const testSuite = <TSuite>((suitelabel: string, suitefunc: (t: bluetape.Test) => void) => bluetape(
   suitelabel.toUpperCase(),
   t => suitefunc({
     ...t,
@@ -21,4 +30,6 @@ export const tsuite = <TSuite>((suitelabel: string, suitefunc: (t: bluetape.Test
   })
 ))
 
-tsuite.skip = (...whatever: any[]) => {}
+testSuite.skip = (...whatever: any[]) => {}
+
+export default testSuite

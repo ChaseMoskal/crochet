@@ -2,7 +2,7 @@
 /** Regular expression for parsing js blocks ("<?js ?>" tags) */
 const regex = /<\?(?:js|)([\s\S]*?)\?>/igm
 
-/** Magic token used internally temporarily */
+/** Magic token used internally temporarily (todo: there has to be a better way) */
 const token = "<@@-CROCHET-TOKEN-@@>"
 
 /**
