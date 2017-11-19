@@ -1,24 +1,16 @@
 {
-  "editor.detectIndentation": false,
-  "editor.insertSpaces": true,
-  "editor.tabSize": 2,
-  "editor.renderWhitespace": "boundary",
-  "editor.wordWrap": "on",
-  "editor.wrappingIndent": "indent",
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
 
-  "files.eol": "\n",
-  "files.encoding": "utf8",
-  "files.insertFinalNewline": true,
+	"files.eol": "\n",
+	"files.encoding": "utf8",
+	"files.insertFinalNewline": true,
 
-  "files.exclude": {
-    "o": false,
-    "node_modules": true,
-    "*.log*": true
-  },
+	"files.exclude": {
+		"o": true,
+		"node_modules": true,
+		"*.log*": true
+	},
 
-  "search.exclude": {
-    "o": true
-  },
-
-  "typescript.tsdk": "node_modules/typescript/lib/"
+	"typescript.tsdk": "node_modules/typescript/lib/"
 }

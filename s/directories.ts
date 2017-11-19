@@ -11,12 +11,12 @@ const slashRegex = /\/|\\/
  * Promise wrapper for the 'mkdirp' npm module
  */
 export async function mkdir(dirpath: string) {
-  return new Promise<void>((resolve, reject) => {
-    mkdirp(dirpath, (error: Error) => {
-      if (error) reject(error)
-      else resolve()
-    })
-  })
+	return new Promise<void>((resolve, reject) => {
+		mkdirp(dirpath, (error: Error) => {
+			if (error) reject(error)
+			else resolve()
+		})
+	})
 }
 
 /**
@@ -24,15 +24,15 @@ export async function mkdir(dirpath: string) {
  */
 export async function mkdirForFile(filepath: string) {
 
-  // No slash, no directories to make
-  if (!slashRegex.test(filepath))
-    return
+	// No slash, no directories to make
+	if (!slashRegex.test(filepath))
+		return
 
-  // Separate the filename from the dirpath
-  const segments = filepath.split(slashRegex)
-  const filename = segments.pop()
-  const dirpath = segments.join("/")
+	// Separate the filename from the dirpath
+	const segments = filepath.split(slashRegex)
+	const filename = segments.pop()
+	const dirpath = segments.join("/")
 
-  // Make directories
-  await mkdir(dirpath)
+	// Make directories
+	await mkdir(dirpath)
 }

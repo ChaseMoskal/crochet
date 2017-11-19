@@ -1,13 +1,14 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2017",
-    "moduleResolution": "node",
-    "lib": ["es2017"],
-    "rootDir": "s",
-    "outDir": "o",
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "declaration": true
-  }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"rootDir": "s",
+		"outDir": "o",
+		"module": "commonjs",
+		"target": "es2017",
+		"lib": ["es2017"],
+		"moduleResolution": "node",
+		"noImplicitAny": false,
+		"sourceMap": true,
+		"declaration": true
+	}
 }
