@@ -1,8 +1,8 @@
 {
 	"name": "crochet",
-	"version": "0.5.0-dev.1",
+	"version": "0.5.0-dev.2",
 	"description": "static site generator with style",
-	"main": "o/crochet.js",
+	"main": "o/crochet",
 	"types": "o/crochet.d.ts",
 	"scripts": {
 		"prepare": "rimraf o && tsc && npm test -s",
